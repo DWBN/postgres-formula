@@ -3,17 +3,27 @@ postgres:
   pkg_dev: postgresql-devel
   pkg_libpq_dev: postgresql-libs
   pkg_client: postgresql-client
-  pkg_contrib: postgresql-contrib
   python: python-psycopg2
   service: postgresql
   conf_dir: /var/lib/pgsql/data
-  create_cluster: False
-  init_db: False
-  version: 9.1
   use_upstream_repo: False
   users: {}
   acls: []
   databases: {}
   tablespaces: {}
+  postgresconf_backup: True
   postgresconf: ""
   pg_hba.conf: salt://postgres/pg_hba.conf
+  user: postgres
+  group: postgres
+  # if prepare_cluster is over-ridden in any of:
+  # - osmap.yaml
+  # - oscodenamemap.yaml
+  # - osfingermap.yaml
+  # you will have to specify a complete dictionary.
+  prepare_cluster:
+    user: root
+    command: service postgresql initdb
+    test: test -f /var/lib/pgsql/data/PG_VERSION
+    env: {}
+

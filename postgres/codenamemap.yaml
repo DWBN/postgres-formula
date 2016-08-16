@@ -1,18 +1,22 @@
-wheezy:
-  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main
-  conf_dir: /etc/postgresql/9.1/main
-  pkg_dev: postgresql-server-dev-9.1
-jessie:
-  version: 9.4
-  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main
-  conf_dir: /etc/postgresql/9.4/main
-  pkg_dev: postgresql-server-dev-9.4
-trusty:
-  version: 9.3
-  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
-utopic:
-  version: 9.4
-  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main
-vivid:
-  version: 9.4
-  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main
+{%- macro ubuntu_block(name, version) %}
+{{ name }}:
+  pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ {{ name }}-pgdg main
+  conf_dir: /etc/postgresql/{{ version }}/main
+  prepare_cluster:
+    command: pg_createcluster {{ version }} main
+    test: test -f /var/lib/postgresql/{{ version }}/main/PG_VERSION && test -f /etc/postgresql/{{ version }}/main/postgresql.conf
+    user: root
+    env: {}
+{%- endmacro %}
+
+{{ ubuntu_block('wheezy', 9.1) }}
+
+{{ ubuntu_block('trusty', 9.3) }}
+
+{{ ubuntu_block('precise', 9.4) }}
+{{ ubuntu_block('jessie', 9.4) }}
+{{ ubuntu_block('utopic', 9.4) }}
+{{ ubuntu_block('vivid', 9.4) }}
+{{ ubuntu_block('wily', 9.4) }}
+
+{{ ubuntu_block('xenial', 9.5) }}
