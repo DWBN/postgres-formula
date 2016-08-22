@@ -17,11 +17,11 @@ trusty:
   pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main
   conf_dir: /etc/postgresql/9.3/main
   data_dir: /var/lib/postgresql/9.3/main
-    prepare_cluster:
-      command: pg_createcluster 9.3 main
-      test: test -f /var/lib/postgresql/9.3/main/PG_VERSION && test -f /etc/postgresql/9.3/main/postgresql.conf
-      user: root
-      env: {}
+  prepare_cluster:
+    command: pg_createcluster 9.3 main
+    test: test -f /var/lib/postgresql/9.3/main/PG_VERSION && test -f /etc/postgresql/9.3/main/postgresql.conf
+    user: root
+    env: {}
 utopic:
   version: 9.4
   pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ utopic-pgdg main
@@ -42,8 +42,8 @@ xenial:
   pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
   conf_dir: /etc/postgresql/9.5/main
   data_dir: /var/lib/postgresql/9.5/main
-    prepare_cluster:
-      command: pg_createcluster 9.5 main
-      test: test -f /var/lib/postgresql/9.5/main/PG_VERSION && test -f /etc/postgresql/9.5/main/postgresql.conf
-      user: root
-      env: {}
+  prepare_cluster:
+    command: pg_createcluster 9.5 main
+    test: test -f /var/lib/postgresql/9.5/main/PG_VERSION && test -f /etc/postgresql/9.5/main/postgresql.conf
+    user: root
+    env: {}
