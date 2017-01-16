@@ -38,12 +38,12 @@ wily:
   conf_dir: /etc/postgresql/9.4/main
   data_dir: /var/lib/postgresql/9.4/main
 xenial:
-  version: 9.5
+  version: 9.6
   pkg_repo: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
-  conf_dir: /etc/postgresql/9.5/main
-  data_dir: /var/lib/postgresql/9.5/main
+  conf_dir: /etc/postgresql/9.6/main
+  data_dir: /var/lib/postgresql/9.6/main
   prepare_cluster:
-    command: pg_createcluster 9.5 main
-    test: test -f /var/lib/postgresql/9.5/main/PG_VERSION && test -f /etc/postgresql/9.5/main/postgresql.conf
+    command: pg_createcluster 9.6 main
+    test: test -f /var/lib/postgresql/9.6/main/PG_VERSION && test -f /etc/postgresql/9.6/main/postgresql.conf
     user: root
     env: {}
